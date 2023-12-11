@@ -1,0 +1,15 @@
+function doGet(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = sheet.getDataRange().getValues();
+  var query = e.parameter.q;
+  var result = "Not Found";
+
+  for (var i = 0; i < data.length; i++) {
+    if (data[i][1] === query) {
+      result = data[i][2];
+      break;
+    }
+  }
+
+  return ContentService.createTextOutput(result).setMimeType(ContentService.MimeType.TEXT);
+}
